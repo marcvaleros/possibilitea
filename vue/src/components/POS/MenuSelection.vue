@@ -62,8 +62,6 @@
  * FOR @CLICK, CALL A METHOD
  * IN THAT METHOD, CALL THE ACTION THAT WILL CALL THE MUTATION
  */
-
-
 import SecondaryButton from "../Buttons/SecondaryButton.vue";
 
 export default {
