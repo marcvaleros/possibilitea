@@ -59,7 +59,7 @@
           <CustomDropdown
             @changeSelect="getCategory"
             title="Category"
-            :default="category ? category : 'Select Category'" 
+            :default="category" 
             :options="categories"
             background="inputField"
             :width= 374
@@ -69,7 +69,7 @@
           <CustomDropdown
             @changeSelect="getSubcategory"
             title="Subcategory"
-            :default="subcategory ? subcategory : 'Select Subcategory'" 
+            :default="subcategory" 
             :options="subcategories"
             background="inputField"
             :width= 374
@@ -141,11 +141,11 @@
         user: 'admin',
         item: Array,
         form: {
-          item_name: '',
-          subcat_id: '',
-          itemCat_id: '',
+          name: '',
+          selectedCategory: '',
+          selectedSubcategory: '',
           price: '',
-          img_path: 'image.png',
+          image: '',
         },        
         categoryArr:null,
         categories: null,
@@ -184,32 +184,26 @@
     },  
     methods: {
     saveItem(){
-      this.$store.dispatch('saveItem', this.form);
+      // this.$store.dispatch('saveItem', this.form)
+      // this.$router.push({ name: 'ItemList' });
     },
 
     getCategory(value){
-      this.form.subcat_id = this.$store.state.subcategoryList.filter(function(item){
-        return item.name == value          
-        })[0].id;
-      
-        this.$store.state.categories.map((item) => {
-          if (item.name == value) {
-            this.subcategories = Object.getOwnPropertyNames(item.items);
-            }
-        });
-
+      // this.form.selectedSubcategory = 'Select Subcategory';
+      this.form.selectedCategory = value;
+          this.$store.state.categories.map((item) => {
+              if (item.name == value) {
+                  this.subcategories = Object.getOwnPropertyNames(item.items);
+              }
+          });
     },
 
     getSubcategory(value){
-      // this.form.selectedSubcategory = value;
-      this.form.itemCat_id = this.$store.state.itemCategoryList.filter(function(item){
-        return item.name == value          
-        })[0].id;
-
+      this.form.selectedSubcategory = value;
     },
 
     getName(value){
-      this.form.item_name = value;
+      this.form.name = value;
     },
 
     getPrice(value){
